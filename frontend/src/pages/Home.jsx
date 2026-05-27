@@ -5,7 +5,7 @@ import {
   Stethoscope, Building2, School, Users, Megaphone, Leaf,
   ShieldCheck, Check,
 } from 'lucide-react';
-import { get } from '../utils/api';
+import { get, BACKEND_BASE_URL } from '../utils/api';
 import SectionTitle from '../components/SectionTitle';
 import StatCard from '../components/StatCard';
 import ProgramCard from '../components/ProgramCard';
@@ -108,6 +108,7 @@ const fallbackHeroImages = [
 
 export default function Home() {
   const [activities, setActivities] = useState([]);
+
   const [heroImages, setHeroImages] = useState(fallbackHeroImages);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -125,7 +126,7 @@ export default function Home() {
         const galleryRes = await get('/gallery?category=HERO');
         if (galleryRes.data && galleryRes.data.length > 0) {
           setHeroImages(galleryRes.data.map(item => ({
-            src: item.imageUrl?.startsWith('http') ? item.imageUrl : `http://localhost:5000${item.imageUrl}`,
+            src: item.imageUrl?.startsWith('http') ? item.imageUrl : `${BACKEND_BASE_URL}${item.imageUrl}`,
             alt: item.caption || 'Hero Image'
           })));
         }

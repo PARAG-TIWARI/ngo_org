@@ -1,4 +1,5 @@
 import { Calendar, MapPin } from 'lucide-react';
+import { BACKEND_BASE_URL } from '../utils/api';
 
 export default function ActivityCard({ activity, onClick }) {
   const { title, description, date, location, image } = activity;
@@ -8,7 +9,7 @@ export default function ActivityCard({ activity, onClick }) {
     : '';
 
   const imageUrl = image
-    ? (image.startsWith('http') ? image : `http://localhost:5000${image}`)
+    ? (image.startsWith('http') ? image : `${BACKEND_BASE_URL}${image}`)
     : null;
 
   return (

@@ -1,5 +1,6 @@
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useCallback } from 'react';
+import { BACKEND_BASE_URL } from '../utils/api';
 
 export default function Lightbox({ images, currentIndex, onClose, onPrev, onNext }) {
   const handleKeyDown = useCallback(
@@ -25,7 +26,7 @@ export default function Lightbox({ images, currentIndex, onClose, onPrev, onNext
   const current = images[currentIndex];
   const imageUrl = current.image || current.url || current;
   const src = typeof imageUrl === 'string'
-    ? (imageUrl.startsWith('http') ? imageUrl : `https://ngo-org.onrender.com${imageUrl}`)
+    ? (imageUrl.startsWith('http') ? imageUrl : `${BACKEND_BASE_URL}${imageUrl}`)
     : '';
 
   return (

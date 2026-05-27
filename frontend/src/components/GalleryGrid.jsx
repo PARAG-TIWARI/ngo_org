@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { BACKEND_BASE_URL } from '../utils/api';
 import Lightbox from './Lightbox';
 
 export default function GalleryGrid({ images = [], categories = [] }) {
@@ -38,7 +39,7 @@ export default function GalleryGrid({ images = [], categories = [] }) {
         {filteredImages.map((img, idx) => {
           const src = img.image || img.url || img;
           const imageUrl = typeof src === 'string'
-            ? (src.startsWith('http') ? src : `http://localhost:5000${src}`)
+            ? (src.startsWith('http') ? src : `${BACKEND_BASE_URL}${src}`)
             : '';
 
           return (

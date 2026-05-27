@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Plus, Edit3, Trash2, X, Calendar, MapPin } from 'lucide-react';
-import { get, post, put, del } from '../utils/api';
+import { get, post, put, del, BACKEND_BASE_URL } from '../utils/api';
 import Spinner from '../components/Spinner';
 
 const emptyForm = { title: '', description: '', date: '', location: '', image: null, extraImages: [] };
@@ -128,7 +128,7 @@ export default function AdminActivities() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {activities.map((activity) => {
             const imgSrc = activity.image
-              ? (activity.image.startsWith('http') ? activity.image : `http://localhost:5000${activity.image}`)
+              ? (activity.image.startsWith('http') ? activity.image : `${BACKEND_BASE_URL}${activity.image}`)
               : null;
             return (
               <div key={activity._id} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">

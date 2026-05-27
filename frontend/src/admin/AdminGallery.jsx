@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { Upload, Trash2, X, Image as ImageIcon } from 'lucide-react';
-import { get, post, del } from '../utils/api';
+import { get, post, del, BACKEND_BASE_URL } from '../utils/api';
 import Spinner from '../components/Spinner';
 
 export default function AdminGallery() {
@@ -143,7 +143,7 @@ export default function AdminGallery() {
           </div>
         ) : (
           images.map((img) => {
-            const src = img.image?.startsWith('http') ? img.image : `http://localhost:5000${img.image}`;
+            const src = img.image?.startsWith('http') ? img.image : `${BACKEND_BASE_URL}${img.image}`;
             return (
               <div key={img._id} className="group relative rounded-xl overflow-hidden bg-gray-100 aspect-square">
                 <img src={src} alt={img.caption || ''} className="w-full h-full object-cover" loading="lazy" />
