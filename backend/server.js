@@ -46,6 +46,15 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'NGO Backend is running' });
 });
 
+// Root endpoint for quick backend verification
+app.get('/', (req, res) => {
+  res.json({
+    status: 'ok',
+    message: 'NGO Backend is live',
+    info: 'Use /api/health for health checks and /api/* for API routes',
+  });
+});
+
 // Global error handler
 app.use((err, req, res, next) => {
   console.error('Error:', err.message);
@@ -66,4 +75,7 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`🚀 NGO Backend server running on http://localhost:${PORT}`);
+});
+app.get('/', (req, res) => {
+  res.send('NGO Backend is live');
 });
