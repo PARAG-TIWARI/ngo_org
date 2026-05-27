@@ -77,7 +77,7 @@ export default function AdminMembers() {
       member.imageUrl
         ? member.imageUrl.startsWith('http')
           ? member.imageUrl
-          : `https://ngo-org.onrender.com${member.imageUrl}`
+          : `http://localhost:5000${member.imageUrl}`
         : ''
     );
   };
@@ -237,7 +237,7 @@ export default function AdminMembers() {
                 <tr key={member.id} className="hover:bg-gray-50/50">
                   <td className="px-6 py-4">
                     {member.imageUrl ? (
-                      <img src={member.imageUrl?.startsWith('http') ? member.imageUrl : `https://ngo-org.onrender.com${member.imageUrl}`} alt={member.name} className="w-10 h-10 rounded-full object-cover" />
+                      <img src={member.imageUrl?.startsWith('http') ? member.imageUrl : `http://localhost:5000${member.imageUrl}`} alt={member.name} className="w-10 h-10 rounded-full object-cover" />
                     ) : (
                       <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-bold">
                         {member.name.charAt(0)}

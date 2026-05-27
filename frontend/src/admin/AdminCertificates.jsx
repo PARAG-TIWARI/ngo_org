@@ -75,7 +75,7 @@ export default function AdminCertificates() {
       certificate.imageUrl
         ? certificate.imageUrl.startsWith('http')
           ? certificate.imageUrl
-          : `https://ngo-org.onrender.com${certificate.imageUrl}`
+          : `http://localhost:5000${certificate.imageUrl}`
         : ''
     );
   };

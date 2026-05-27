@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://ngo-org.onrender.com/api',
+  baseURL: 'http://localhost:5000/api',
 });
 
 // Request interceptor to attach JWT token

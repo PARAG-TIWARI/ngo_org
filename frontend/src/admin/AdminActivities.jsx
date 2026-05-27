@@ -128,7 +128,7 @@ export default function AdminActivities() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {activities.map((activity) => {
             const imgSrc = activity.image
-              ? (activity.image.startsWith('http') ? activity.image : `https://ngo-org.onrender.com${activity.image}`)
+              ? (activity.image.startsWith('http') ? activity.image : `http://localhost:5000${activity.image}`)
               : null;
             return (
               <div key={activity._id} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
