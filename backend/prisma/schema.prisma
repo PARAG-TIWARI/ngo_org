@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Activity {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  date        String
+  location    String
+  imageUrl    String?
+  images      ActivityImage[]
+  createdAt   DateTime @default(now())
+}
+
+model ActivityImage {
+  id         Int      @id @default(autoincrement())
+  activityId Int
+  imageUrl   String
+  caption    String?
+  activity   Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+}
+
+model GalleryItem {
+  id        Int      @id @default(autoincrement())
+  imageUrl  String
+  caption   String?
+  category  String
+  createdAt DateTime @default(now())
+}
+
+model Volunteer {
+  id             Int      @id @default(autoincrement())
+  fullName       String
+  email          String
+  phone          String
+  skills         String?
+  availability   String?
+  areaOfInterest String?
+  createdAt      DateTime @default(now())
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  value String
+}
+
+model Member {
+  id          Int      @id @default(autoincrement())
+  name        String
+  designation String
+  profession  String?
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+}
+
+model Certificate {
+  id          Int      @id @default(autoincrement())
+  title       String
+  verifiedBy  String?
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+}
+
+model Donation {
+  id            Int      @id @default(autoincrement())
+  donorName     String
+  email         String?
+  phone         String
+  amount        String
+  transactionId String
+  paymentDate   String
+  paymentMethod String   @default("Bank Transfer")
+  message       String?
+  isVerified    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+}
