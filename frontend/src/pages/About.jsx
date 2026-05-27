@@ -247,6 +247,65 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      {/* Channel Partners */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle
+            title="Our Channel Partners"
+            subtitle="Proudly collaborating with esteemed government bodies to amplify our impact"
+          />
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Bhopal Municipal Corporation */}
+            <div className="group relative bg-gradient-to-br from-light-50 to-white rounded-3xl p-8 border border-gray-100 hover:shadow-xl hover:shadow-primary-500/10 transition-all duration-500 hover:-translate-y-1">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-50 to-transparent rounded-bl-[80px] rounded-tr-3xl opacity-60" />
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <div className="w-32 h-32 rounded-2xl bg-white shadow-lg shadow-gray-200/50 border border-gray-100 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300 overflow-hidden p-3">
+                  <img
+                    src="/partner_bmc.png"
+                    alt="Bhopal Municipal Corporation Logo"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <h4 className="font-heading text-xl font-bold text-dark-900 mb-1">
+                  Bhopal Municipal Corporation
+                </h4>
+                <p className="text-primary-600 font-medium text-sm mb-4">
+                  नगर पालिक निगम, भोपाल
+                </p>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Partnering with Bhopal Municipal Corporation for urban development initiatives,
+                  sanitation drives, and community welfare programs across the city of Bhopal.
+                </p>
+              </div>
+            </div>
+
+            {/* Ministry of AYUSH – NMPB */}
+            <div className="group relative bg-gradient-to-br from-light-50 to-white rounded-3xl p-8 border border-gray-100 hover:shadow-xl hover:shadow-primary-500/10 transition-all duration-500 hover:-translate-y-1">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-50 to-transparent rounded-bl-[80px] rounded-tr-3xl opacity-60" />
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <div className="w-32 h-32 rounded-2xl bg-white shadow-lg shadow-gray-200/50 border border-gray-100 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300 overflow-hidden p-3">
+                  <img
+                    src="/partner_nmpb.png"
+                    alt="National Medicinal Plants Board Logo"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <h4 className="font-heading text-xl font-bold text-dark-900 mb-1">
+                  National Medicinal Plants Board
+                </h4>
+                <p className="text-primary-600 font-medium text-sm mb-4">
+                  Ministry of AYUSH, Government of India
+                </p>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Collaborating with NMPB under the Ministry of AYUSH for the conservation,
+                  cultivation, and sustainable utilization of medicinal plants across our project areas.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
