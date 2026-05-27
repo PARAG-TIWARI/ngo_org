@@ -38,7 +38,7 @@ export default function GalleryGrid({ images = [], categories = [] }) {
         {filteredImages.map((img, idx) => {
           const src = img.image || img.url || img;
           const imageUrl = typeof src === 'string'
-            ? (src.startsWith('http') ? src : `http://localhost:5000${src}`)
+            ? (src.startsWith('http') ? src : `https://ngo-org.onrender.com${src}`)
             : '';
 
           return (

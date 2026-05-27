@@ -53,7 +53,7 @@ export default function Certifications() {
                 <div
                   onClick={() => {
                     if (cred.imageUrl) {
-                      const fullUrl = cred.imageUrl.startsWith('http') ? cred.imageUrl : `http://localhost:5000${cred.imageUrl}`;
+                      const fullUrl = cred.imageUrl.startsWith('http') ? cred.imageUrl : `https://ngo-org.onrender.com${cred.imageUrl}`;
                       setSelectedImage(fullUrl);
                       setSelectedTitle(cred.title);
                     }
@@ -64,7 +64,7 @@ export default function Certifications() {
                 >
                   {cred.imageUrl ? (
                     <img
-                      src={cred.imageUrl?.startsWith('http') ? cred.imageUrl : `http://localhost:5000${cred.imageUrl}`}
+                      src={cred.imageUrl?.startsWith('http') ? cred.imageUrl : `https://ngo-org.onrender.com${cred.imageUrl}`}
                       alt={cred.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />

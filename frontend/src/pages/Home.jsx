@@ -125,7 +125,7 @@ export default function Home() {
         const galleryRes = await get('/gallery?category=HERO');
         if (galleryRes.data && galleryRes.data.length > 0) {
           setHeroImages(galleryRes.data.map(item => ({
-            src: item.imageUrl?.startsWith('http') ? item.imageUrl : `http://localhost:5000${item.imageUrl}`,
+            src: item.imageUrl?.startsWith('http') ? item.imageUrl : `https://ngo-org.onrender.com${item.imageUrl}`,
             alt: item.caption || 'Hero Image'
           })));
         }

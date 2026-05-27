@@ -75,7 +75,7 @@ export default function AdminCertificates() {
       certificate.imageUrl
         ? certificate.imageUrl.startsWith('http')
           ? certificate.imageUrl
-          : `http://localhost:5000${certificate.imageUrl}`
+          : `https://ngo-org.onrender.com${certificate.imageUrl}`
         : ''
     );
   };
@@ -223,7 +223,7 @@ export default function AdminCertificates() {
                 <tr key={cert.id} className="hover:bg-gray-50/50">
                   <td className="px-6 py-4">
                     {cert.imageUrl ? (
-                      <img src={cert.imageUrl?.startsWith('http') ? cert.imageUrl : `http://localhost:5000${cert.imageUrl}`} alt={cert.title} className="w-16 h-12 rounded object-cover" />
+                      <img src={cert.imageUrl?.startsWith('http') ? cert.imageUrl : `https://ngo-org.onrender.com${cert.imageUrl}`} alt={cert.title} className="w-16 h-12 rounded object-cover" />
                     ) : (
                       <div className="w-16 h-12 rounded bg-gray-200 flex items-center justify-center text-gray-500 text-xs">
                         No Image

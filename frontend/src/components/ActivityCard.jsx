@@ -8,7 +8,7 @@ export default function ActivityCard({ activity, onClick }) {
     : '';
 
   const imageUrl = image
-    ? (image.startsWith('http') ? image : `http://localhost:5000${image}`)
+    ? (image.startsWith('http') ? image : `https://ngo-org.onrender.com${image}`)
     : null;
 
   return (

@@ -48,7 +48,7 @@ export default function Members() {
                 <div className="relative aspect-[4/3] overflow-hidden bg-zinc-100 group flex items-center justify-center">
                   {member.imageUrl ? (
                     <img
-                      src={member.imageUrl?.startsWith('http') ? member.imageUrl : `http://localhost:5000${member.imageUrl}`}
+                      src={member.imageUrl?.startsWith('http') ? member.imageUrl : `https://ngo-org.onrender.com${member.imageUrl}`}
                       alt={member.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />

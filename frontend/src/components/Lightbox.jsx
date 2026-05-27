@@ -25,7 +25,7 @@ export default function Lightbox({ images, currentIndex, onClose, onPrev, onNext
   const current = images[currentIndex];
   const imageUrl = current.image || current.url || current;
   const src = typeof imageUrl === 'string'
-    ? (imageUrl.startsWith('http') ? imageUrl : `http://localhost:5000${imageUrl}`)
+    ? (imageUrl.startsWith('http') ? imageUrl : `https://ngo-org.onrender.com${imageUrl}`)
     : '';
 
   return (

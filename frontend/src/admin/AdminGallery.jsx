@@ -143,7 +143,7 @@ export default function AdminGallery() {
           </div>
         ) : (
           images.map((img) => {
-            const src = img.image?.startsWith('http') ? img.image : `http://localhost:5000${img.image}`;
+            const src = img.image?.startsWith('http') ? img.image : `https://ngo-org.onrender.com${img.image}`;
             return (
               <div key={img._id} className="group relative rounded-xl overflow-hidden bg-gray-100 aspect-square">
                 <img src={src} alt={img.caption || ''} className="w-full h-full object-cover" loading="lazy" />
