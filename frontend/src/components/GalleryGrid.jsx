@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FALLBACK_IMAGE, handleBrokenImage, normalizeImageUrl } from '../utils/api';
+import { handleBrokenImage, normalizeImageUrl } from '../utils/api';
 import Lightbox from './Lightbox';
 
 export default function GalleryGrid({ images = [], categories = [] }) {
@@ -38,7 +38,7 @@ export default function GalleryGrid({ images = [], categories = [] }) {
       <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
         {filteredImages.map((img, idx) => {
           const src = img.image || img.url || img;
-          const imageUrl = normalizeImageUrl(src) || FALLBACK_IMAGE;
+          const imageUrl = normalizeImageUrl(src);
 
           return (
             <div

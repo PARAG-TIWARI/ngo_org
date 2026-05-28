@@ -64,7 +64,7 @@ export default function Certifications() {
                 >
                   {cred.imageUrl ? (
                     <img
-                      src={normalizeImageUrl(cred.imageUrl) || FALLBACK_IMAGE}
+                      src={normalizeImageUrl(cred.imageUrl)}
                       alt={cred.title}
                       onError={handleBrokenImage}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

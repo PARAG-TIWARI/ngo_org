@@ -147,7 +147,7 @@ export default function Activities() {
               <div className="w-full h-64 sm:h-80 md:h-96 relative bg-gray-100">
                 {selectedActivity.image ? (
                   <img
-                    src={normalizeImageUrl(selectedActivity.image) || FALLBACK_IMAGE}
+                    src={normalizeImageUrl(selectedActivity.image)}
                     alt={selectedActivity.title}
                     onError={handleBrokenImage}
                     className="w-full h-full object-cover"
@@ -196,7 +196,7 @@ export default function Activities() {
                         <div key={idx} className="flex flex-col gap-2">
                           <div className="aspect-square rounded-xl overflow-hidden bg-gray-100 shadow-sm border border-gray-100 group">
                             <img
-                              src={normalizeImageUrl(img.imageUrl) || FALLBACK_IMAGE}
+                              src={normalizeImageUrl(img.imageUrl)}
                               alt={img.caption || `Gallery ${idx + 1}`}
                               onError={handleBrokenImage}
                               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"

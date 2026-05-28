@@ -48,7 +48,7 @@ export default function Members() {
                 <div className="relative aspect-[4/3] overflow-hidden bg-zinc-100 group flex items-center justify-center">
                   {member.imageUrl ? (
                     <img
-                      src={normalizeImageUrl(member.imageUrl) || FALLBACK_IMAGE}
+                      src={normalizeImageUrl(member.imageUrl)}
                       alt={member.name}
                       onError={handleBrokenImage}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"

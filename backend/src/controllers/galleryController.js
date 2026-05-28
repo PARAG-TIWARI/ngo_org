@@ -1,5 +1,5 @@
 const prisma = require('../prisma');
-const { getImageUrl, deleteImage, getFilenameFromUrl } = require('../services/storageService');
+const { uploadToPersistentStorage, deleteImage } = require('../services/storageService');
 
 const mapItem = (item) => ({
   ...item,
@@ -69,7 +69,7 @@ const create = async (req, res) => {
       return res.status(400).json({ error: 'Category is required.' });
     }
 
-    const imageUrl = getImageUrl(req.file.filename);
+    const imageUrl = await uploadToPersistentStorage(req.file);
 
     const item = await prisma.galleryItem.create({
       data: {
@@ -102,9 +102,7 @@ const remove = async (req, res) => {
       return res.status(404).json({ error: 'Gallery item not found.' });
     }
 
-    // Delete the image file from disk
-    const filename = getFilenameFromUrl(item.imageUrl);
-    deleteImage(filename);
+    await deleteImage(item.imageUrl);
 
     // Delete the record from database
     await prisma.galleryItem.delete({

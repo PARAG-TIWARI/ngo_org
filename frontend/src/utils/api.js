@@ -28,7 +28,9 @@ const normalizeImageUrl = (value) => {
 
   return value.startsWith('/uploads/') || value.startsWith('/api/uploads/')
     ? `${BACKEND_BASE_URL}${value}`
-    : value;
+    : value.startsWith('uploads/')
+      ? `${BACKEND_BASE_URL}/${value}`
+      : value;
 };
 
 const api = axios.create({
@@ -39,12 +41,17 @@ export const FALLBACK_IMAGE = '/hero_children_studying.png';
 
 export const handleBrokenImage = (event) => {
   const target = event?.currentTarget;
-  if (!target || target.dataset.fallbackApplied === 'true') return;
+  if (!target) return;
+
+  if (target.dataset.fallbackApplied === 'true') return;
 
   target.dataset.fallbackApplied = 'true';
-  if (target.getAttribute('src') !== FALLBACK_IMAGE) {
-    target.src = FALLBACK_IMAGE;
+
+  if (target.getAttribute('src') === FALLBACK_IMAGE) {
+    return;
   }
+
+  console.warn('Image failed to load:', target.getAttribute('src'));
 };
 
 export { BACKEND_BASE_URL, normalizeImageUrl };

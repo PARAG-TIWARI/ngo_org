@@ -1,5 +1,5 @@
 const prisma = require('../prisma');
-const { getImageUrl, deleteImage, getFilenameFromUrl } = require('../services/storageService');
+const { uploadToPersistentStorage, deleteImage } = require('../services/storageService');
 
 const mapActivity = (activity) => ({
   ...activity,
@@ -64,7 +64,9 @@ const create = async (req, res) => {
       });
     }
 
-    const imageUrl = req.files && req.files['image'] ? getImageUrl(req.files['image'][0].filename) : null;
+    const imageUrl = req.files && req.files['image']
+      ? await uploadToPersistentStorage(req.files['image'][0])
+      : null;
     
     let captions = [];
     if (req.body.captions) {
@@ -72,10 +74,10 @@ const create = async (req, res) => {
     }
 
     const imagesData = req.files && req.files['extraImages'] 
-      ? req.files['extraImages'].map((f, i) => ({
-          imageUrl: getImageUrl(f.filename),
+      ? await Promise.all(req.files['extraImages'].map(async (f, i) => ({
+          imageUrl: await uploadToPersistentStorage(f),
           caption: captions[i] || null
-        }))
+        })))
       : [];
 
     const activity = await prisma.activity.create({
@@ -125,19 +127,15 @@ const update = async (req, res) => {
     // If a new image was uploaded, delete the old one and use the new one
     if (req.files && req.files['image']) {
       if (existing.imageUrl) {
-        const oldFilename = getFilenameFromUrl(existing.imageUrl);
-        deleteImage(oldFilename);
+        await deleteImage(existing.imageUrl);
       }
-      updateData.imageUrl = getImageUrl(req.files['image'][0].filename);
+      updateData.imageUrl = await uploadToPersistentStorage(req.files['image'][0]);
     }
 
     if (req.files && req.files['extraImages']) {
       // First, delete old files from disk
       const existingImages = await prisma.activityImage.findMany({ where: { activityId: parseInt(id) }});
-      existingImages.forEach(img => {
-        const oldFilename = getFilenameFromUrl(img.imageUrl);
-        deleteImage(oldFilename);
-      });
+      await Promise.all(existingImages.map((img) => deleteImage(img.imageUrl)));
       // Delete old records from DB
       await prisma.activityImage.deleteMany({ where: { activityId: parseInt(id) }});
 
@@ -146,10 +144,10 @@ const update = async (req, res) => {
         captions = Array.isArray(req.body.captions) ? req.body.captions : [req.body.captions];
       }
 
-      const imagesData = req.files['extraImages'].map((f, i) => ({
-        imageUrl: getImageUrl(f.filename),
+      const imagesData = await Promise.all(req.files['extraImages'].map(async (f, i) => ({
+        imageUrl: await uploadToPersistentStorage(f),
         caption: captions[i] || null
-      }));
+      })));
 
       updateData.images = {
         create: imagesData
@@ -187,16 +185,12 @@ const remove = async (req, res) => {
 
     // Delete the image file from disk
     if (activity.imageUrl) {
-      const filename = getFilenameFromUrl(activity.imageUrl);
-      deleteImage(filename);
+      await deleteImage(activity.imageUrl);
     }
 
     // Delete extra images from disk
     const existingImages = await prisma.activityImage.findMany({ where: { activityId: parseInt(id) }});
-    existingImages.forEach(img => {
-      const filename = getFilenameFromUrl(img.imageUrl);
-      deleteImage(filename);
-    });
+    await Promise.all(existingImages.map((img) => deleteImage(img.imageUrl)));
 
     // Delete the record from database
     await prisma.activity.delete({
