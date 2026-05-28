@@ -1,6 +1,6 @@
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useCallback } from 'react';
-import { BACKEND_BASE_URL } from '../utils/api';
+import { FALLBACK_IMAGE, handleBrokenImage, normalizeImageUrl } from '../utils/api';
 
 export default function Lightbox({ images, currentIndex, onClose, onPrev, onNext }) {
   const handleKeyDown = useCallback(
@@ -25,9 +25,7 @@ export default function Lightbox({ images, currentIndex, onClose, onPrev, onNext
 
   const current = images[currentIndex];
   const imageUrl = current.image || current.url || current;
-  const src = typeof imageUrl === 'string'
-    ? (imageUrl.startsWith('http') ? imageUrl : `${BACKEND_BASE_URL}${imageUrl}`)
-    : '';
+  const src = normalizeImageUrl(imageUrl) || FALLBACK_IMAGE;
 
   return (
     <div
@@ -60,6 +58,7 @@ export default function Lightbox({ images, currentIndex, onClose, onPrev, onNext
         <img
           src={src}
           alt={current.caption || `Image ${currentIndex + 1}`}
+          onError={handleBrokenImage}
           className="max-w-full max-h-[85vh] object-contain rounded-lg"
         />
         {current.caption && (

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { get, post, put, del, BACKEND_BASE_URL } from '../utils/api';
+import { get, post, put, del, normalizeImageUrl } from '../utils/api';
 import { Plus, Trash2, Edit, X, Upload } from 'lucide-react';
 
 export default function AdminCertificates() {
@@ -71,13 +71,7 @@ export default function AdminCertificates() {
     });
     setEditingId(certificate.id);
     setImageFile(null);
-    setImagePreview(
-      certificate.imageUrl
-        ? certificate.imageUrl.startsWith('http')
-          ? certificate.imageUrl
-          : `${BACKEND_BASE_URL}${certificate.imageUrl}`
-        : ''
-    );
+    setImagePreview(normalizeImageUrl(certificate.imageUrl) || '');
   };
 
   const handleCancel = () => {
@@ -223,7 +217,7 @@ export default function AdminCertificates() {
                 <tr key={cert.id} className="hover:bg-gray-50/50">
                   <td className="px-6 py-4">
                     {cert.imageUrl ? (
-                      <img src={cert.imageUrl?.startsWith('http') ? cert.imageUrl : `${BACKEND_BASE_URL}${cert.imageUrl}`} alt={cert.title} className="w-16 h-12 rounded object-cover" />
+                      <img src={normalizeImageUrl(cert.imageUrl) || ''} alt={cert.title} className="w-16 h-12 rounded object-cover" />
                     ) : (
                       <div className="w-16 h-12 rounded bg-gray-200 flex items-center justify-center text-gray-500 text-xs">
                         No Image

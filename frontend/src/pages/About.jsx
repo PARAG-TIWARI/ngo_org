@@ -50,8 +50,7 @@ export default function About() {
                 <p>
                   <strong className="text-dark-900">Maharshi Dayanand Jan Kalyan Sanstha</strong> was
                   established with a deep-rooted belief that every citizen deserves access to education,
-                  clean water, healthcare, and a healthy environment. Inspired by the reformist ideals of
-                  Maharshi Dayanand Saraswati, our organization began its journey in the heartlands of
+                  clean water, healthcare, and a healthy environment. Our organization began its journey in the heartlands of
                   Madhya Pradesh.
                 </p>
                 <p>
@@ -77,9 +76,9 @@ export default function About() {
               <div className="rounded-2xl bg-gradient-to-br from-primary-50 to-primary-100 p-8 lg:p-12">
                 <div className="space-y-6">
                   {[
-                    { year: '2015', event: 'Founded as a grassroots initiative in Bhopal district' },
-                    { year: '2017', event: 'Registered as a formal society under Societies Registration Act' },
-                    { year: '2019', event: 'Expanded operations to 5 districts across MP' },
+                    { year: '2005', event: 'Founded as a grassroots initiative in Bhopal district' },
+                    { year: '2005', event: 'Registered as a formal society under Societies Registration Act' },
+                    { year: '2019', event: 'Expanded operations to over various districts across MP' },
                     { year: '2021', event: 'Launched comprehensive digital literacy program' },
                     { year: '2023', event: 'Crossed 5,000 direct beneficiaries milestone' },
                     { year: '2025', event: 'Partnering with state government on rural education' },

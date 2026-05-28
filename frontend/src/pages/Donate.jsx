@@ -4,13 +4,12 @@ import { get } from '../utils/api';
 import SectionTitle from '../components/SectionTitle';
 
 const impactCards = [
-  { icon: GraduationCap, amount: '₹500', desc: 'Provides school supplies for one child for a full year' },
-  { icon: TreePine, amount: '₹200', desc: 'Plants and nurtures 5 saplings to full growth' },
-  { icon: Stethoscope, amount: '₹1,000', desc: 'Covers healthcare screening for 10 villagers' },
-  { icon: Droplets, amount: '₹2,000', desc: 'Helps build a rainwater harvesting unit for a family' },
-  { icon: Building2, amount: '₹5,000', desc: 'Funds a month of skill training for rural women' },
+  { icon: GraduationCap, amount: '₹', desc: 'Provides school supplies for one child for a full year' },
+  { icon: TreePine, amount: '₹', desc: 'Plants and nurtures 5 saplings to full growth' },
+  { icon: Stethoscope, amount: '₹', desc: 'Covers healthcare screening for 10 villagers' },
+  { icon: Droplets, amount: '₹', desc: 'Helps build a rainwater harvesting unit for a family' },
+  { icon: Building2, amount: '₹', desc: 'Funds a month of skill training for rural women' },
 ];
-
 export default function Donate() {
   const [bankDetails, setBankDetails] = useState({
     bankName: 'HDFC Bank',
@@ -19,6 +18,14 @@ export default function Donate() {
     ifscCode: 'HDFC0003694',
     branch: 'HDFC Bank',
   });
+
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyUPI = () => {
+    navigator.clipboard.writeText('maharshidayanandjank.82256377@hdfcbank');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   useEffect(() => {
     (async () => {
@@ -114,18 +121,39 @@ export default function Donate() {
               <h3 className="font-heading text-xl font-bold text-dark-900 mb-2">Pay via UPI</h3>
               <p className="text-gray-600 text-sm mb-6">Scan the QR code or use UPI ID</p>
 
-              {/* Coming Soon Placeholder */}
-              <div className="w-48 h-48 bg-white rounded-xl shadow-inner border-2 border-dashed border-primary-300 flex flex-col items-center justify-center mb-4">
-                <div className="w-14 h-14 rounded-full bg-primary-100 flex items-center justify-center mb-3">
-                  <Smartphone className="w-7 h-7 text-primary-500" />
-                </div>
-                <p className="font-heading font-bold text-dark-900 text-sm">Coming Soon</p>
-                <p className="text-xs text-gray-400 mt-1">QR Code & UPI</p>
+              {/* QR Code Image */}
+              <div className="w-48 h-48 bg-white rounded-xl shadow-md border border-primary-200/50 flex items-center justify-center mb-4 overflow-hidden group hover:scale-[1.03] transition-all duration-300">
+                <a href="/qr_code.jpg" target="_blank" rel="noopener noreferrer" className="w-full h-full p-2 flex items-center justify-center" title="Click to view full merchant details">
+                  <img
+                    src="/qr_code_cropped.jpg"
+                    alt="UPI QR Code"
+                    className="w-full h-full object-contain"
+                  />
+                </a>
               </div>
 
-              <div className="bg-white rounded-lg px-4 py-2 shadow-sm">
-                <p className="text-xs text-gray-500">UPI ID</p>
-                <p className="font-mono font-semibold text-gray-400">Coming Soon</p>
+              <div className="bg-white rounded-xl px-4 py-2.5 shadow-sm border border-primary-200/50 flex items-center gap-3 max-w-full">
+                <div className="text-left min-w-0">
+                  <p className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">UPI ID</p>
+                  <p className="font-mono font-bold text-dark-900 text-xs truncate select-all">
+                    maharshidayanandjank.82256377@hdfcbank
+                  </p>
+                </div>
+                <button
+                  onClick={handleCopyUPI}
+                  className={`p-1.5 rounded-lg transition-colors shrink-0 ${copied ? 'bg-green-50 text-green-600' : 'hover:bg-primary-50 text-primary-600'}`}
+                  title="Copy UPI ID"
+                >
+                  {copied ? (
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : (
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                    </svg>
+                  )}
+                </button>
               </div>
             </div>
           </div>
@@ -219,7 +247,7 @@ export default function Donate() {
               <div>
                 <p className="font-bold text-emerald-700 uppercase tracking-wider text-[10px]">Tax Benefit Information</p>
                 <p className="mt-1 font-medium leading-relaxed text-gray-700">
-                  YOUR CONTRIBUTIONS ARE ELIGIBLE FOR UPTO 50% TAX BENEFIT UNDER SECTION 80G AS <strong className="text-gray-900">Maharshi Dayanand Jan Kalyan Sanstha</strong> IS REGISTERED AS NON PROFIT ORGANIZATION.
+                   <strong className="text-gray-900">MAHARSHI DAYANAND JAN KALYAN SANSTHA</strong> IS REGISTERED AS NON PROFIT ORGANIZATION.
                 </p>
                 <p className="mt-2 text-dark-900 font-bold font-mono text-[11px] bg-emerald-50/50 inline-block px-2.5 py-1 rounded-lg border border-emerald-100">
                   PAN: AAKAM7709B &nbsp;|&nbsp; 80G NUMBER: AAKAM7709B26BP02
@@ -236,7 +264,7 @@ export default function Donate() {
               <div className="leading-relaxed text-gray-500">
                 <p className="font-bold text-primary-700 uppercase tracking-wider text-[10px]">Donor Communications</p>
                 <p className="mt-1">
-                  Maharshi Dayanand Jan Kalyan Sanstha may get in touch with you through WhatsApp, email, SMS, or phone to share details about your donation, 80G receipt and progress on programmes. You can choose to opt out of these communications or raise any concerns by writing to us at <a href="mailto:Maharshisanstha35@gmail.com" className="text-primary-600 font-semibold hover:underline">Maharshisanstha35@gmail.com</a>.
+                  Maharshi Dayanand Jan Kalyan Sanstha may get in touch with you through WhatsApp, email, SMS, or phone to share details about your donation, 80G receipt and progress on programs. You can choose to opt out of these communications or raise any concerns by writing to us at <a href="mailto:Maharshisanstha35@gmail.com" className="text-primary-600 font-semibold hover:underline">Maharshisanstha35@gmail.com</a>.
                 </p>
               </div>
             </div>

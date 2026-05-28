@@ -1,13 +1,53 @@
 import axios from 'axios';
 
-const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
-const BACKEND_BASE_URL = VITE_API_BASE_URL.replace(/\/api\/?$/, '') || 'http://localhost:5000';
+const DEFAULT_BACKEND_BASE_URL = 'https://ngo-org.onrender.com';
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || `${DEFAULT_BACKEND_BASE_URL}/api`;
+const BACKEND_BASE_URL = VITE_API_BASE_URL.replace(/\/api\/?$/, '') || DEFAULT_BACKEND_BASE_URL;
+
+const normalizeImageUrl = (value) => {
+  if (!value || typeof value !== 'string') return null;
+
+  if (/^https?:\/\//i.test(value)) {
+    try {
+      const url = new URL(value);
+      const currentBase = BACKEND_BASE_URL.replace(/\/$/, '');
+      const isLegacyUploadHost = /^(localhost|127\.0\.0\.1)(:\d+)?$/i.test(url.hostname)
+        || url.hostname === 'ngo-org.onrender.com'
+        || url.hostname === 'ngo-org-w4wh.onrender.com'
+        || url.hostname.endsWith('.onrender.com');
+
+      if (isLegacyUploadHost && url.pathname.startsWith('/uploads/')) {
+        return `${currentBase}${url.pathname}${url.search}`;
+      }
+
+      return value;
+    } catch {
+      return value;
+    }
+  }
+
+  return value.startsWith('/uploads/') || value.startsWith('/api/uploads/')
+    ? `${BACKEND_BASE_URL}${value}`
+    : value;
+};
 
 const api = axios.create({
   baseURL: VITE_API_BASE_URL,
 });
 
-export { BACKEND_BASE_URL };
+export const FALLBACK_IMAGE = '/hero_children_studying.png';
+
+export const handleBrokenImage = (event) => {
+  const target = event?.currentTarget;
+  if (!target || target.dataset.fallbackApplied === 'true') return;
+
+  target.dataset.fallbackApplied = 'true';
+  if (target.getAttribute('src') !== FALLBACK_IMAGE) {
+    target.src = FALLBACK_IMAGE;
+  }
+};
+
+export { BACKEND_BASE_URL, normalizeImageUrl };
 
 // Request interceptor to attach JWT token
 api.interceptors.request.use(

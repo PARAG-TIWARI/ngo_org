@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { get, BACKEND_BASE_URL } from '../utils/api';
+import { FALLBACK_IMAGE, get, handleBrokenImage, normalizeImageUrl } from '../utils/api';
 import SectionTitle from '../components/SectionTitle';
 import { ShieldCheck, Check, X } from 'lucide-react';
 
@@ -53,7 +53,7 @@ export default function Certifications() {
                 <div
                   onClick={() => {
                     if (cred.imageUrl) {
-                      const fullUrl = cred.imageUrl.startsWith('http') ? cred.imageUrl : `${BACKEND_BASE_URL}${cred.imageUrl}`;
+                      const fullUrl = normalizeImageUrl(cred.imageUrl) || '';
                       setSelectedImage(fullUrl);
                       setSelectedTitle(cred.title);
                     }
@@ -64,8 +64,9 @@ export default function Certifications() {
                 >
                   {cred.imageUrl ? (
                     <img
-                      src={cred.imageUrl?.startsWith('http') ? cred.imageUrl : `${BACKEND_BASE_URL}${cred.imageUrl}`}
+                      src={normalizeImageUrl(cred.imageUrl) || FALLBACK_IMAGE}
                       alt={cred.title}
+                      onError={handleBrokenImage}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (

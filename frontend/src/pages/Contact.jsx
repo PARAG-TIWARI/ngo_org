@@ -9,14 +9,14 @@ const contactInfo = [
     icon: MapPin,
     title: 'REGISTERED Address',
     lines: [
-      ' Maharishi Dayanand Public Welfare Organization, Bhopal J-351, Kotra Sultanabad Road',
+      'Maharshi Dayanand Jan Kalyan Sanstha, Bhopal J-351, Kotra Sultanabad Road',
     ],
   },
   {
     icon: MapPin,
     title: 'Temporary Address',
     lines: [
-      ' H NO. 114 HARI NAGAR NEELBAD BHOPAL -462044'
+      'H NO. 114 HARI NAGAR NEELBAD BHOPAL -462044'
 
     ],
   },

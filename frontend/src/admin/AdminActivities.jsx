@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Plus, Edit3, Trash2, X, Calendar, MapPin } from 'lucide-react';
-import { get, post, put, del, BACKEND_BASE_URL } from '../utils/api';
+import { get, post, put, del, normalizeImageUrl } from '../utils/api';
 import Spinner from '../components/Spinner';
 
 const emptyForm = { title: '', description: '', date: '', location: '', image: null, extraImages: [] };
@@ -127,9 +127,7 @@ export default function AdminActivities() {
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {activities.map((activity) => {
-            const imgSrc = activity.image
-              ? (activity.image.startsWith('http') ? activity.image : `${BACKEND_BASE_URL}${activity.image}`)
-              : null;
+            const imgSrc = normalizeImageUrl(activity.image);
             return (
               <div key={activity._id} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
                 <div className="h-40 bg-gradient-to-br from-primary-100 to-primary-200 relative">
@@ -236,7 +234,7 @@ export default function AdminActivities() {
                     value={form.location}
                     onChange={(e) => setForm({ ...form, location: e.target.value })}
                     className="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none text-sm"
-                    placeholder="e.g., Varanasi, UP"
+                    placeholder="e.g., BHOPAL, MP"
                   />
                 </div>
               </div>

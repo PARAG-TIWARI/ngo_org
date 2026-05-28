@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { get, BACKEND_BASE_URL } from '../utils/api';
+import { FALLBACK_IMAGE, get, handleBrokenImage, normalizeImageUrl } from '../utils/api';
 import SectionTitle from '../components/SectionTitle';
 
 export default function Members() {
@@ -48,8 +48,9 @@ export default function Members() {
                 <div className="relative aspect-[4/3] overflow-hidden bg-zinc-100 group flex items-center justify-center">
                   {member.imageUrl ? (
                     <img
-                      src={member.imageUrl?.startsWith('http') ? member.imageUrl : `${BACKEND_BASE_URL}${member.imageUrl}`}
+                      src={normalizeImageUrl(member.imageUrl) || FALLBACK_IMAGE}
                       alt={member.name}
+                      onError={handleBrokenImage}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   ) : (

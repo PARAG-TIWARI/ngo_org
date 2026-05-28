@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Search, X, Calendar, MapPin } from 'lucide-react';
-import { get, BACKEND_BASE_URL } from '../utils/api';
+import { FALLBACK_IMAGE, get, handleBrokenImage, normalizeImageUrl } from '../utils/api';
 import SectionTitle from '../components/SectionTitle';
 import ActivityCard from '../components/ActivityCard';
 import Spinner from '../components/Spinner';
@@ -12,7 +12,7 @@ const fallbackActivities = [
     description:
       'Over 500 saplings were planted along the Ganga riverbank with enthusiastic participation from local school students, teachers, and community members. Species included neem, peepal, banyan, and mango.',
     date: '2025-07-15',
-    location: 'Varanasi, UP',
+    location: 'BHOPAL, MP',
   },
   {
     _id: '2',
@@ -20,7 +20,7 @@ const fallbackActivities = [
     description:
       'A city-wide awareness rally promoting girls\' education with participation from over 1,000 students, parents, and teachers. The event featured speeches, street plays, and poster campaigns.',
     date: '2025-09-08',
-    location: 'Prayagraj, UP',
+    location: 'BHOPAL, MP',
   },
   {
     _id: '3',
@@ -28,7 +28,7 @@ const fallbackActivities = [
     description:
       'Comprehensive free medical check-ups including eye tests, blood sugar screening, blood pressure monitoring, and dental examination. Over 300 patients were examined and referred for further treatment.',
     date: '2025-04-07',
-    location: 'Mirzapur, UP',
+    location: 'BHOPAL, MP',
   },
   {
     _id: '4',
@@ -36,7 +36,7 @@ const fallbackActivities = [
     description:
       'A hands-on workshop teaching communities about rainwater harvesting, check dam construction, and sustainable water use practices. Participants built a model rainwater harvesting system.',
     date: '2025-06-22',
-    location: 'Jaunpur, UP',
+    location: 'BHOPAL, MP',
   },
   {
     _id: '5',
@@ -44,7 +44,7 @@ const fallbackActivities = [
     description:
       'A 3-month tailoring training program for women from economically weaker sections. 25 women graduated and received sewing machines to start their own micro-enterprises.',
     date: '2025-03-15',
-    location: 'Chandauli, UP',
+    location: 'BHOPAL, MP',
   },
   {
     _id: '6',
@@ -52,7 +52,7 @@ const fallbackActivities = [
     description:
       'Community-wide cleanliness drive covering main roads, marketplaces, and public spaces. Volunteers collected over 500 kg of waste and promoted dustbin usage and waste segregation.',
     date: '2025-10-02',
-    location: 'Varanasi, UP',
+    location: 'BHOPAL, MP',
   },
 ];
 
@@ -147,8 +147,9 @@ export default function Activities() {
               <div className="w-full h-64 sm:h-80 md:h-96 relative bg-gray-100">
                 {selectedActivity.image ? (
                   <img
-                    src={selectedActivity.image.startsWith('http') ? selectedActivity.image : `${BACKEND_BASE_URL}${selectedActivity.image}`}
+                    src={normalizeImageUrl(selectedActivity.image) || FALLBACK_IMAGE}
                     alt={selectedActivity.title}
+                    onError={handleBrokenImage}
                     className="w-full h-full object-cover"
                   />
                 ) : (
@@ -195,8 +196,9 @@ export default function Activities() {
                         <div key={idx} className="flex flex-col gap-2">
                           <div className="aspect-square rounded-xl overflow-hidden bg-gray-100 shadow-sm border border-gray-100 group">
                             <img
-                              src={img.imageUrl.startsWith('http') ? img.imageUrl : `${BACKEND_BASE_URL}${img.imageUrl}`}
+                              src={normalizeImageUrl(img.imageUrl) || FALLBACK_IMAGE}
                               alt={img.caption || `Gallery ${idx + 1}`}
+                              onError={handleBrokenImage}
                               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                             />
                           </div>

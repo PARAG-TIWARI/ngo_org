@@ -122,7 +122,7 @@ export default function Footer() {
               <li className="flex items-start gap-3 text-sm">
                 <MapPin className="w-5 h-5 text-primary-400 shrink-0 mt-0.5" />
                 <div className="space-y-1.5 text-gray-400">
-                  <p className="leading-tight"><strong className="text-gray-300">Registered:</strong> Maharishi Dayanand Public Welfare Organization, Bhopal J-351, Kotra Sultanabad Road</p>
+                  <p className="leading-tight"><strong className="text-gray-300">Registered:</strong> Maharshi Dayanand Jan Kalyan Sanstha, Bhopal J-351, Kotra Sultanabad Road</p>
                   <p className="leading-tight"><strong className="text-gray-300">Temporary:</strong> H NO. 114 HARI NAGAR NEELBAD BHOPAL -462044</p>
                 </div>
               </li>
@@ -134,7 +134,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3 text-sm">
                 <Mail className="w-5 h-5 text-primary-400 shrink-0" />
-                <a href="Maharshisanstha35@gmail.com" className="text-gray-400 hover:text-primary-400 transition-colors">
+                <a href="mailto:Maharshisanstha35@gmail.com" className="text-gray-400 hover:text-primary-400 transition-colors">
                   Maharshisanstha35@gmail.com
                 </a>
               </li>

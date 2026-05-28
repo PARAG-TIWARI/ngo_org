@@ -1,5 +1,5 @@
 import { Calendar, MapPin } from 'lucide-react';
-import { BACKEND_BASE_URL } from '../utils/api';
+import { FALLBACK_IMAGE, handleBrokenImage, normalizeImageUrl } from '../utils/api';
 
 export default function ActivityCard({ activity, onClick }) {
   const { title, description, date, location, image } = activity;
@@ -8,9 +8,7 @@ export default function ActivityCard({ activity, onClick }) {
     ? new Date(date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
     : '';
 
-  const imageUrl = image
-    ? (image.startsWith('http') ? image : `${BACKEND_BASE_URL}${image}`)
-    : null;
+  const imageUrl = normalizeImageUrl(image) || FALLBACK_IMAGE;
 
   return (
     <div
@@ -23,6 +21,7 @@ export default function ActivityCard({ activity, onClick }) {
           <img
             src={imageUrl}
             alt={title}
+            onError={handleBrokenImage}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           />
         ) : (

@@ -5,7 +5,7 @@ import {
   Stethoscope, Building2, School, Users, Megaphone, Leaf,
   ShieldCheck, Check,
 } from 'lucide-react';
-import { get, BACKEND_BASE_URL } from '../utils/api';
+import { FALLBACK_IMAGE, get, handleBrokenImage, normalizeImageUrl } from '../utils/api';
 import SectionTitle from '../components/SectionTitle';
 import StatCard from '../components/StatCard';
 import ProgramCard from '../components/ProgramCard';
@@ -57,19 +57,19 @@ const testimonials = [
     quote:
       'Thanks to the education program, my daughter is the first in our family to attend school. The volunteers helped us understand the importance of girls\' education and supported us throughout the admission process.',
     author: 'Ramesh Kumar',
-    role: 'Parent, Varanasi District',
+    role: 'Parent ',
   },
   {
     quote:
       'The water conservation workshop changed how our entire village thinks about water. We built check dams and started rainwater harvesting. Our wells no longer dry up in summer.',
     author: 'Sunita Devi',
-    role: 'Village Sarpanch, Rural UP',
+    role: 'Village Sarpanch',
   },
   {
     quote:
       'The free health camp identified my mother\'s diabetes early. The NGO connected us with a government hospital for treatment. Their follow-up care has been exceptional.',
     author: 'Priya Sharma',
-    role: 'Community Member, Prayagraj',
+    role: 'Community Member',
   },
 ];
 
@@ -80,7 +80,7 @@ const fallbackActivities = [
     description:
       'Over 500 saplings were planted along the riverbank with participation from local school students and community members.',
     date: '2025-07-15',
-    location: 'Varanasi, UP',
+    location: 'BHOPAL, MP',
   },
   {
     _id: '2',
@@ -88,7 +88,7 @@ const fallbackActivities = [
     description:
       'A city-wide awareness rally promoting girls\' education with participation from over 1,000 students and parents.',
     date: '2025-09-08',
-    location: 'Prayagraj, UP',
+    location: 'Bhopal, MP',
   },
   {
     _id: '3',
@@ -96,7 +96,7 @@ const fallbackActivities = [
     description:
       'Free medical check-ups including eye tests, blood sugar screening, and dental examination for rural communities.',
     date: '2025-04-07',
-    location: 'Mirzapur, UP',
+    location: 'Bhopal, MP',
   },
 ];
 
@@ -108,7 +108,6 @@ const fallbackHeroImages = [
 
 export default function Home() {
   const [activities, setActivities] = useState([]);
-
   const [heroImages, setHeroImages] = useState(fallbackHeroImages);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -126,7 +125,7 @@ export default function Home() {
         const galleryRes = await get('/gallery?category=HERO');
         if (galleryRes.data && galleryRes.data.length > 0) {
           setHeroImages(galleryRes.data.map(item => ({
-            src: item.imageUrl?.startsWith('http') ? item.imageUrl : `${BACKEND_BASE_URL}${item.imageUrl}`,
+            src: normalizeImageUrl(item.imageUrl) || item.image || FALLBACK_IMAGE,
             alt: item.caption || 'Hero Image'
           })));
         }
@@ -203,6 +202,7 @@ export default function Home() {
                     key={index}
                     src={image.src}
                     alt={image.alt}
+                    onError={handleBrokenImage}
                     className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
                       }`}
                   />
@@ -274,7 +274,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-900/60 to-transparent" />
                 <div className="absolute bottom-6 left-6 text-white z-10">
                   <p className="font-heading text-2xl font-bold mb-1">
-                    Since 2015
+                    Since 2019
                   </p>
                   <p className="text-white/80 text-sm">
                     Serving communities across Madhya Pradesh
