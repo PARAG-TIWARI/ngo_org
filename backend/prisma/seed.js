@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   // Seed default admin user
-  const hashedPassword = await bcrypt.hash('admin123', 10);
+  const hashedPassword = await bcrypt.hash('NGOadmin@2019', 10);
 
   await prisma.admin.upsert({
     where: { username: 'admin' },
@@ -18,7 +18,7 @@ async function main() {
     },
   });
 
-  console.log('✅ Default admin user created (username: admin, password: admin123)');
+  console.log('✅ Default admin user created (username: mdjks@admin, password: NGOadmin@2019)');
 
   // Seed default settings
   const defaultSettings = [
