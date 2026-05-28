@@ -247,8 +247,7 @@ export default function Home() {
               <p className="text-gray-600 leading-relaxed mb-4">
                 Maharshi Dayanand Jan Kalyan Sanstha is a registered non-profit organization
                 committed to transforming the lives of underprivileged communities across
-                Madhya Pradesh and beyond. Founded on the principles of Swami Dayanand
-                Saraswati, we believe in education as the greatest tool for social change.
+                Madhya Pradesh and beyond. we believe in education as the greatest tool for social change.
               </p>
               <p className="text-gray-600 leading-relaxed mb-6">
                 Our grassroots approach ensures that every initiative — from school enrollment
