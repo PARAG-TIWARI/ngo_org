@@ -6,9 +6,9 @@ import SectionTitle from '../components/SectionTitle';
 const impactCards = [
   { icon: GraduationCap, amount: '₹', desc: 'Provides school supplies for one child for a full year' },
   { icon: TreePine, amount: '₹', desc: 'Plants and nurtures  saplings to full growth' },
-  { icon: Stethoscope, amount: '₹', desc: 'Covers healthcare screening for 10 villagers' },
+  { icon: Stethoscope, amount: '₹', desc: 'Cover healthcare in rural areas' },
   { icon: Droplets, amount: '₹', desc: 'Helps build a rainwater harvesting unit for a family' },
-  { icon: Building2, amount: '₹', desc: 'Funds a month of skill training for rural women' },
+  { icon: Building2, amount: '₹', desc: 'Helping the needy with food and care' },
 ];
 export default function Donate() {
   const [bankDetails, setBankDetails] = useState({
