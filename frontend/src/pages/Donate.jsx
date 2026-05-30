@@ -117,13 +117,13 @@ export default function Donate() {
 
               {/* QR Code Image */}
               <div className="bg-white rounded-xl shadow-md border border-primary-200/50 flex items-center justify-center mb-4 overflow-hidden group hover:scale-[1.03] transition-all duration-300 p-3">
-                <a href="/qr_code.jpg" target="_blank" rel="noopener noreferrer" className="w-full h-full flex items-center justify-center" title="Click to view full size">
-                  <img
-                    src="/qr_code.jpg"
-                    alt="UPI QR Code"
-                    className="w-full h-full object-contain max-w-[220px]"
-                  />
-                </a>
+                <a href="/qr_code_cropped.png" target="_blank" rel="noopener noreferrer" className="w-full h-full flex items-center justify-center" title="Click to view full size">
+  <img
+    src="/qr_code_cropped.png"
+    alt="UPI QR Code"
+    className="w-full h-full object-contain max-w-[220px]"
+  />
+</a>   
               </div>
 
 
