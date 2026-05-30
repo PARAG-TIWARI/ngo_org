@@ -6,9 +6,9 @@ import SectionTitle from '../components/SectionTitle';
 const impactCards = [
   { icon: GraduationCap, amount: '₹', desc: 'Provides school supplies for one child for a full year' },
   { icon: TreePine, amount: '₹', desc: 'Plants and nurtures  saplings to full growth' },
-  { icon: Stethoscope, amount: '₹', desc: 'Cover healthcare in rural areas' },
+  { icon: Stethoscope, amount: '₹', desc: 'Covers healthcare screening for 10 villagers' },
   { icon: Droplets, amount: '₹', desc: 'Helps build a rainwater harvesting unit for a family' },
-  { icon: Building2, amount: '₹', desc: 'Helping the needy with food and care' },
+  { icon: Building2, amount: '₹', desc: 'Funds a month of skill training for rural women' },
 ];
 export default function Donate() {
   const [bankDetails, setBankDetails] = useState({
@@ -19,13 +19,7 @@ export default function Donate() {
     branch: 'HDFC Bank',
   });
 
-  const [copied, setCopied] = useState(false);
 
-  const handleCopyUPI = () => {
-    navigator.clipboard.writeText('maharshidayanandjank.82256377@hdfcbank');
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   useEffect(() => {
     (async () => {
@@ -119,42 +113,20 @@ export default function Donate() {
                 <Smartphone className="w-8 h-8 text-primary-600" />
               </div>
               <h3 className="font-heading text-xl font-bold text-dark-900 mb-2">Pay via UPI</h3>
-              <p className="text-gray-600 text-sm mb-6">Scan the QR code or use UPI ID</p>
+              <p className="text-gray-600 text-sm mb-6">Scan the QR code to pay</p>
 
               {/* QR Code Image */}
-              <div className="w-48 h-48 bg-white rounded-xl shadow-md border border-primary-200/50 flex items-center justify-center mb-4 overflow-hidden group hover:scale-[1.03] transition-all duration-300">
-                <a href="/qr_code.jpg" target="_blank" rel="noopener noreferrer" className="w-full h-full p-2 flex items-center justify-center" title="Click to view full merchant details">
+              <div className="bg-white rounded-xl shadow-md border border-primary-200/50 flex items-center justify-center mb-4 overflow-hidden group hover:scale-[1.03] transition-all duration-300 p-3">
+                <a href="/qr_code.jpg" target="_blank" rel="noopener noreferrer" className="w-full h-full flex items-center justify-center" title="Click to view full size">
                   <img
-                    src="/qr_code_cropped.jpg"
+                    src="/qr_code.jpg"
                     alt="UPI QR Code"
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain max-w-[220px]"
                   />
                 </a>
               </div>
 
-              <div className="bg-white rounded-xl px-4 py-2.5 shadow-sm border border-primary-200/50 flex items-center gap-3 max-w-full">
-                <div className="text-left min-w-0">
-                  <p className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">UPI ID</p>
-                  <p className="font-mono font-bold text-dark-900 text-xs truncate select-all">
-                    maharshidayanandjank.82256377@hdfcbank
-                  </p>
-                </div>
-                <button
-                  onClick={handleCopyUPI}
-                  className={`p-1.5 rounded-lg transition-colors shrink-0 ${copied ? 'bg-green-50 text-green-600' : 'hover:bg-primary-50 text-primary-600'}`}
-                  title="Copy UPI ID"
-                >
-                  {copied ? (
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                  ) : (
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                    </svg>
-                  )}
-                </button>
-              </div>
+
             </div>
           </div>
         </div>
